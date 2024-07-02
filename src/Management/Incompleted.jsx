@@ -10,9 +10,8 @@ export default function Incompleted({ incomplete = [], setIncompletedArray, inco
   };
 
   const confirmEdit = (item) => {
-    if (window.confirm("Do you want to edit this task?")) {
       editTask(item);
-    }
+
   };
 
   return (

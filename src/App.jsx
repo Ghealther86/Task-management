@@ -11,7 +11,7 @@ export default function App() {
   const [incompletedArray, setIncompletedArray] = useState([]);
   const [completedArray, setCompletedArray] = useState([]);
   const [check, setCheck] = useState(false);
-  const [editingTask, setEditingTask] = useState(null); 
+  const [editingTask, setEditingTask] = useState(null);
 
   const handleChange = (event) => {
     setForm({
@@ -19,10 +19,12 @@ export default function App() {
       [event.target.name]: event.target.value,
     });
   };
-
   const handleSubmit = () => {
+    if(form.name.trim()===""){
+      alert("task name cannot be empty.")
+      return;
+    }
     const date = new Date();
-
     if (editingTask) {
       const updatedIncomplete = incomplete.map((task) =>
         task.id === editingTask.id ? { ...task, name: form.name } : task
@@ -34,6 +36,7 @@ export default function App() {
       setIncomplete(updatedIncomplete);
       setCompleted(updatedCompleted);
       setEditingTask(null);
+      alert("Do you want to save change?"); // Notification after submitting the update
     } else {
       const newTask = { ...form, id: date.getTime() };
 
@@ -48,9 +51,12 @@ export default function App() {
     setCheck(false);
   };
 
+
   const deleteTask = (task) => {
     setIncomplete(incomplete.filter((item) => item.id !== task.id));
     setCompleted(completed.filter((item) => item.id !== task.id));
+    setIncompletedArray(incompletedArray.filter((item)=> item.id !== task.id));
+    setCompletedArray(completedArray.filter((item)=> item.id !== task.id));
   };
 
   const editTask = (task) => {
@@ -65,6 +71,7 @@ export default function App() {
     );
     setIncomplete(remainingIncomplete);
     setIncompletedArray([]);
+    setCheck(false); // Ensure checkbox is reset
   };
 
   const moveTasksToIncomplete = () => {
@@ -74,12 +81,13 @@ export default function App() {
     );
     setCompleted(remainingCompleted);
     setCompletedArray([]);
+    setCheck(false); // Ensure checkbox is reset
   };
 
   return (
     <div className="p-5">
       <div className="border rounded-xl shadow-transparent">
-        <Task/>
+        <Task />
         <div className="flex item-center justify-center gap-4">
           <input
             type="text"
@@ -141,7 +149,7 @@ export default function App() {
             />
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Checked2({ ele, completedArray, setCompletedArray }) {
   const [check, setCheck] = useState(false);
-
+  
+  useEffect(()=>{
+    setCheck(completedArray.includes(ele));
+  },[completedArray,ele]);
   const handleCheck = () => {
     if (check) {
       const data = completedArray.filter(item => item.id !== ele.id);

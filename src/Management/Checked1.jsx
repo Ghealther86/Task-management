@@ -1,7 +1,10 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 export default function Checked1({ item, setIncompletedArray, incompletedArray }) {
   const [check, setCheck] = useState(false);
+
+  useEffect(()=>{
+    setCheck(incompletedArray.includes(item));
+  },[incompletedArray,item]);
 
   const handleCheck = () => {
     if (check) {

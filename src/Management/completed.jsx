@@ -10,9 +10,9 @@ export default function Completed({ completed = [], completedArray, setCompleted
   };
 
   const confirmEdit = (item) => {
-    if (window.confirm("Do you want to edit this task?")) {
+    // if (window.confirm("Do you want to edit this task?")) 
       editTask(item);
-    }
+    
   };
 
   return (
@@ -28,7 +28,7 @@ export default function Completed({ completed = [], completedArray, setCompleted
             <div className="mx-2">{box.id}</div>
             <div className="flex gap-2">
               <button className=" hover:text-blue-500 " onClick={() => confirmEdit(box)}><FaRegEdit /></button>
-              <button className="hover:text-red-00" onClick={() => confirmDelete(box)}><FaTrashAlt /></button>
+              <button className="hover:text-red-500" onClick={() => confirmDelete(box)}><FaTrashAlt /></button>
             </div>
           </div>
         </div>
